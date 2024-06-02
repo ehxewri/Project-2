@@ -19,13 +19,13 @@ Marketing Proposal
     - **80/20 split**
 
 - **Technologies**: Mandatory use of Scikit-learn and at least three of the following:
-  - API requests
-  - Matplotlib
-  - Pandas
-  - Pandas plotting
+  - API requests - not needed
+  - Matplotlib - this will be good for a scaterplat 
+  - Pandas - Marketing_Campaign.ipynb 
+  - Pandas plotting - we can use this for picking the best n-cluster
   - Prophet
-  - Python
-  - Time series analysis
+  - Python - for creatign functions that simplify the code
+  - Time series analysis - we will not use time series for this dataset
 
 
 
@@ -34,16 +34,61 @@ Marketing Proposal
 ## Context
 A response model can significantly enhance the efficiency of a marketing campaign by increasing responses or reducing expenses. The objective is to predict who will respond to an offer for a product or service.
 
-## Content
+## Content - Data exploration
+
+Response and accept columns assign 0 to no reponse. 1 to 5 attempt 5 to first attempt. the idea is the most favorable response would have the highest value to the lowest value being no responce
+_____________________________________________
 - **AcceptedCmp1**: 1 if customer accepted the offer in the 1st campaign, 0 otherwise.
 - **AcceptedCmp2**: 1 if customer accepted the offer in the 2nd campaign, 0 otherwise.
 - **AcceptedCmp3**: 1 if customer accepted the offer in the 3rd campaign, 0 otherwise.
 - **AcceptedCmp4**: 1 if customer accepted the offer in the 4th campaign, 0 otherwise.
 - **AcceptedCmp5**: 1 if customer accepted the offer in the 5th campaign, 0 otherwise.
 - **Response (target)**: 1 if customer accepted the offer in the last campaign, 0 otherwise.
+____________________________________________
 - **Complain**: 1 if customer complained in the last 2 years.
+
 - **DtCustomer**: Date of customer’s enrollment with the company.
+
+For year of birth I want to try something new. Based on generational values, group ages into 
+age ranges.Generational groupings provide a way to categorize cohorts of people who experienced similar societal events during formative years. These generational labels are primarily applied in the United States and other Western countries and can vary somewhat by definition and cultural interpretation. Here's a broad overview of the generations from the Greatest Generation to those being born today:
+
+1. The Greatest Generation
+Birth Years: Early 1900s to 1927
+Age Range (as of 2023): 96 years and older
+Characteristics: Grew up during the Great Depression, many fought in World War II.
+2. The Silent Generation
+Birth Years: 1928 to 1945
+Age Range (as of 2023): 78 to 95 years
+Characteristics: Known for hard work and strong values, often seen as the traditionalists who played a key role in shaping post-war prosperity.
+3. Baby Boomers
+Birth Years: 1946 to 1964
+Age Range (as of 2023): 59 to 77 years
+Characteristics: Experienced dramatic social changes, economic prosperity, and the civil rights movement. Known for being work-centric.
+4. Generation X
+Birth Years: 1965 to 1980
+Age Range (as of 2023): 43 to 58 years
+Characteristics: Often referred to as the "latchkey" generation, valued independence, and work-life balance, experienced the rise of personal computing.
+5. Millennials (Gen Y)
+Birth Years: 1981 to 1996
+Age Range (as of 2023): 27 to 42 years
+Characteristics: Tech-savvy, value flexibility and purpose in their work, experienced the growth of the internet and social media.
+6. Generation Z (Gen Z)
+Birth Years: 1997 to 2012
+Age Range (as of 2023): 11 to 26 years
+Characteristics: Digital natives who value individual expression and avoid labels, highly connected, concerned with mental health and the environment.
+7. Generation Alpha
+Birth Years: 2013 to present (as of 2023, the end year for this generation has not been fully defined yet)
+Age Range (as of 2023): 0 to 10 years
+Characteristics: Very young and still being shaped, but expected to be the most technologically immersed.
+
+_________________________________________________
+- **Year_Birth**: year customer was born.
+_________________________________________________
+
+
+set education from 0 for none to highest level.
 - **Education**: Customer’s level of education.
+
 - **Marital**: Customer’s marital status.
 - **Kidhome**: Number of small children in customer’s household.
 - **Teenhome**: Number of teenagers in customer’s household.
