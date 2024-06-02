@@ -5,11 +5,11 @@ Marketing Proposal
 
 
 ### Project Objectives:
-- ** Define a Problem**: Identify a significant issue that can be addressed with ML.
+- **Find a Problem**: Identify a significant issue that can be addressed with ML.
     - **Increase the effeciency** of the upcoming marketing campaign by targeting clients that are more likely to be receptive to the offer. Our client has a limited budget and can not have a dialing campaign for all customers and stay within budget. They need to know what customer are mostlikely to be receptive to the marketing campaign so they can maximize the value of there maketing campaign. 
 
 - **Dataset Requirements**: Utilize a dataset with at least 500 records. For decision tree/random forest models, at least 1,000 records are required.
-    - ** Marketing Campaign has over 2000 records. 
+    - **Marketing Campaign has over 2000 records. 
 
 ### Project Element 
 
@@ -18,7 +18,7 @@ Marketing Proposal
 
 - **Evaluation**: Assess your model using testing data, incorporating necessary metrics and visualizations.
     - **80/20 split**
-    - **Standard Scaler** Testing shows that standard scaler has a lower training score but a much better test score than Min/Max. We will use Standard Scaler
+    - **Standard Scaler** Testing shows that standard scaler has a lower training score but a much better test score than Min/Max. We sill use Standard Scaler
 
 - **Technologies**: Mandatory use of Scikit-learn and at least three of the following:
   - API requests - not needed. we imported this using an API anyway so anyone who has a kaggle account can setup and run this. 
@@ -49,8 +49,7 @@ _____________________________________________
 ____________________________________________
 - **Complain**: 1 if customer complained in the last 2 years.
 
-- **DtCustomer**: Date of customer’s enrollment with the company. we should look to convert to months
-
+- **DtCustomer**: Date of customer’s enrollment with the company.
 
 For year of birth I want to try something new. Based on generational values, group ages into 
 age ranges.Generational groupings provide a way to categorize cohorts of people who experienced similar societal events during formative years. These generational labels are primarily applied in the United States and other Western countries and can vary somewhat by definition and cultural interpretation. Here's a broad overview of the generations from the Greatest Generation to those being born today:
