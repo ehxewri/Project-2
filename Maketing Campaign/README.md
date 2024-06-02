@@ -19,7 +19,7 @@ Marketing Proposal
     - **80/20 split**
 
 - **Technologies**: Mandatory use of Scikit-learn and at least three of the following:
-  - API requests - not needed
+  - API requests - not needed. we imported this using an API anyway so anyone who has a kaggle account can setup and run this. 
   - Matplotlib - this will be good for a scaterplat 
   - Pandas - Marketing_Campaign.ipynb 
   - Pandas plotting - we can use this for picking the best n-cluster
