@@ -14,9 +14,11 @@ Marketing Proposal
 ### Project Element 
 
 - **ML Model**: Implement either a supervised or unsupervised model.
-    - **unsupervised**: Thinking we can use data to create groups that are likely to responde to specific campaigns. If not we can use supervised an look for clients likely to respond in a positive way. 
+    - **supervised**: The business wanted to know how likely customers are to respond to a new campaignin a positive way. To do this we need to look at what we know about our clients and how they have responded in the past. Our df - response is our X. y will be the repsonce column. 
+
 - **Evaluation**: Assess your model using testing data, incorporating necessary metrics and visualizations.
     - **80/20 split**
+    - **Standard Scaler** Testing shows that standard scaler has a lower training score but a much better test score than Min/Max. We sill use Standard Scaler
 
 - **Technologies**: Mandatory use of Scikit-learn and at least three of the following:
   - API requests - not needed. we imported this using an API anyway so anyone who has a kaggle account can setup and run this. 
