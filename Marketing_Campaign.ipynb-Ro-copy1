@@ -1007,32 +1007,250 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 68,
+   "execution_count": 69,
    "metadata": {},
    "outputs": [
     {
-     "ename": "ModuleNotFoundError",
-     "evalue": "No module named 'xgboost'",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
-      "Cell \u001b[1;32mIn[68], line 2\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[38;5;66;03m# ******* XGboost MODELING\u001b[39;00m\n\u001b[1;32m----> 2\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mxgboost\u001b[39;00m \u001b[38;5;28;01mas\u001b[39;00m \u001b[38;5;21;01mxgb\u001b[39;00m\n\u001b[0;32m      4\u001b[0m \u001b[38;5;66;03m# Create and train the model\u001b[39;00m\n\u001b[0;32m      5\u001b[0m xgb_model \u001b[38;5;241m=\u001b[39m xgb\u001b[38;5;241m.\u001b[39mXGBClassifier(random_state\u001b[38;5;241m=\u001b[39m\u001b[38;5;241m1\u001b[39m)\n",
-      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'xgboost'"
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "K-Nearest Neighbors - Training Data Score: 0.8955981941309256\n",
+      "K-Nearest Neighbors - Testing Data Score: 0.8738738738738738\n"
      ]
     }
    ],
    "source": [
-    "# ******* XGboost MODELING\n",
-    "import xgboost as xgb\n",
+    "from sklearn.neighbors import KNeighborsClassifier\n",
     "\n",
     "# Create and train the model\n",
-    "xgb_model = xgb.XGBClassifier(random_state=1)\n",
-    "xgb_model.fit(X_train_ss_scaled, y_train)\n",
+    "knn_model = KNeighborsClassifier()\n",
+    "knn_model.fit(X_train_ss_scaled, y_train)\n",
     "\n",
     "# Score the model\n",
-    "print(f\"XGBoost - Training Data Score: {xgb_model.score(X_train_ss_scaled, y_train)}\")\n",
-    "print(f\"XGBoost - Testing Data Score: {xgb_model.score(X_test_ss_scaled, y_test)}\")\n"
+    "print(f\"K-Nearest Neighbors - Training Data Score: {knn_model.score(X_train_ss_scaled, y_train)}\")\n",
+    "print(f\"K-Nearest Neighbors - Testing Data Score: {knn_model.score(X_test_ss_scaled, y_test)}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "K-Nearest Neighbors - Precision: 0.5384615384615384\n",
+      "K-Nearest Neighbors - Recall: 0.3559322033898305\n",
+      "K-Nearest Neighbors - F1 Score: 0.42857142857142855\n",
+      "K-Nearest Neighbors - Cross-Validation Accuracy: 0.8634312087212541\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.neighbors import KNeighborsClassifier\n",
+    "\n",
+    "# Create and train the model\n",
+    "knn_model = KNeighborsClassifier()\n",
+    "knn_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred = knn_model.predict(X_test_ss_scaled)\n",
+    "\n",
+    "# Calculate precision, recall, F1 score\n",
+    "print(f\"K-Nearest Neighbors - Precision: {precision_score(y_test, y_pred)}\")\n",
+    "print(f\"K-Nearest Neighbors - Recall: {recall_score(y_test, y_pred)}\")\n",
+    "print(f\"K-Nearest Neighbors - F1 Score: {f1_score(y_test, y_pred)}\")\n",
+    "\n",
+    "# Cross-validation scores\n",
+    "cv_scores = cross_val_score(knn_model, X_train_ss_scaled, y_train, cv=5, scoring='accuracy')\n",
+    "print(f\"K-Nearest Neighbors - Cross-Validation Accuracy: {cv_scores.mean()}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Support Vector Machine - Training Data Score: 0.9091422121896162\n",
+      "Support Vector Machine - Testing Data Score: 0.8851351351351351\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.svm import SVC\n",
+    "\n",
+    "# Create and train the model\n",
+    "svm_model = SVC()\n",
+    "svm_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Score the model\n",
+    "print(f\"Support Vector Machine - Training Data Score: {svm_model.score(X_train_ss_scaled, y_train)}\")\n",
+    "print(f\"Support Vector Machine - Testing Data Score: {svm_model.score(X_test_ss_scaled, y_test)}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Support Vector Machine - Precision: 0.6666666666666666\n",
+      "Support Vector Machine - Recall: 0.2711864406779661\n",
+      "Support Vector Machine - F1 Score: 0.38554216867469876\n",
+      "Support Vector Machine - Cross-Validation Accuracy: 0.8673812365719742\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.svm import SVC\n",
+    "\n",
+    "# Create and train the model\n",
+    "svm_model = SVC()\n",
+    "svm_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred = svm_model.predict(X_test_ss_scaled)\n",
+    "\n",
+    "# Calculate precision, recall, F1 score\n",
+    "print(f\"Support Vector Machine - Precision: {precision_score(y_test, y_pred)}\")\n",
+    "print(f\"Support Vector Machine - Recall: {recall_score(y_test, y_pred)}\")\n",
+    "print(f\"Support Vector Machine - F1 Score: {f1_score(y_test, y_pred)}\")\n",
+    "\n",
+    "# Cross-validation scores\n",
+    "cv_scores = cross_val_score(svm_model, X_train_ss_scaled, y_train, cv=5, scoring='accuracy')\n",
+    "print(f\"Support Vector Machine - Cross-Validation Accuracy: {cv_scores.mean()}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Logistic Regression - Training Data Score: 0.8797968397291196\n",
+      "Logistic Regression - Testing Data Score: 0.8963963963963963\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.linear_model import LogisticRegression\n",
+    "\n",
+    "# Create and train the model\n",
+    "logistic_regression_model = LogisticRegression()\n",
+    "logistic_regression_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Score the model\n",
+    "print(f\"Logistic Regression - Training Data Score: {logistic_regression_model.score(X_train_ss_scaled, y_train)}\")\n",
+    "print(f\"Logistic Regression - Testing Data Score: {logistic_regression_model.score(X_test_ss_scaled, y_test)}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 74,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Logistic Regression - Precision: 0.696969696969697\n",
+      "Logistic Regression - Recall: 0.3898305084745763\n",
+      "Logistic Regression - F1 Score: 0.5\n",
+      "Logistic Regression - Cross-Validation Accuracy: 0.8713185326649162\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.linear_model import LogisticRegression\n",
+    "\n",
+    "# Create and train the model\n",
+    "logistic_regression_model = LogisticRegression()\n",
+    "logistic_regression_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred = logistic_regression_model.predict(X_test_ss_scaled)\n",
+    "\n",
+    "# Calculate precision, recall, F1 score\n",
+    "print(f\"Logistic Regression - Precision: {precision_score(y_test, y_pred)}\")\n",
+    "print(f\"Logistic Regression - Recall: {recall_score(y_test, y_pred)}\")\n",
+    "print(f\"Logistic Regression - F1 Score: {f1_score(y_test, y_pred)}\")\n",
+    "\n",
+    "# Cross-validation scores\n",
+    "cv_scores = cross_val_score(logistic_regression_model, X_train_ss_scaled, y_train, cv=5, scoring='accuracy')\n",
+    "print(f\"Logistic Regression - Cross-Validation Accuracy: {cv_scores.mean()}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Decision Tree - Training Data Score: 1.0\n",
+      "Decision Tree - Testing Data Score: 0.8333333333333334\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.tree import DecisionTreeClassifier\n",
+    "\n",
+    "# Create and train the model\n",
+    "decision_tree_model = DecisionTreeClassifier(random_state=1)\n",
+    "decision_tree_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Score the model\n",
+    "print(f\"Decision Tree - Training Data Score: {decision_tree_model.score(X_train_ss_scaled, y_train)}\")\n",
+    "print(f\"Decision Tree - Testing Data Score: {decision_tree_model.score(X_test_ss_scaled, y_test)}\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Decision Tree - Precision: 0.4\n",
+      "Decision Tree - Recall: 0.5084745762711864\n",
+      "Decision Tree - F1 Score: 0.44776119402985076\n",
+      "Decision Tree - Cross-Validation Accuracy: 0.8250688310654889\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.tree import DecisionTreeClassifier\n",
+    "\n",
+    "# Create and train the model\n",
+    "decision_tree_model = DecisionTreeClassifier(random_state=1)\n",
+    "decision_tree_model.fit(X_train_ss_scaled, y_train)\n",
+    "\n",
+    "# Predict on test set\n",
+    "y_pred = decision_tree_model.predict(X_test_ss_scaled)\n",
+    "\n",
+    "# Calculate precision, recall, F1 score\n",
+    "print(f\"Decision Tree - Precision: {precision_score(y_test, y_pred)}\")\n",
+    "print(f\"Decision Tree - Recall: {recall_score(y_test, y_pred)}\")\n",
+    "print(f\"Decision Tree - F1 Score: {f1_score(y_test, y_pred)}\")\n",
+    "\n",
+    "# Cross-validation scores\n",
+    "cv_scores = cross_val_score(decision_tree_model, X_train_ss_scaled, y_train, cv=5, scoring='accuracy')\n",
+    "print(f\"Decision Tree - Cross-Validation Accuracy: {cv_scores.mean()}\")\n"
    ]
   },
   {
