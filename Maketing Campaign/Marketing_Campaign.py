@@ -27,7 +27,7 @@ def auto_drop_na(df, drop_percent):
         else:
             print(f"Automatically dropping rows in {column} where NA values are present.")
             df.dropna(subset=[column], inplace=True)
-
+            df.reset_index(drop=True, inplace=True)
     return df
 
 def get_generation(year):
@@ -46,28 +46,73 @@ def get_generation(year):
     return 'Unknown Generation'  # Catch-all for dates outside defined ranges
 #
 # Given a column with date of birth between 1900 and 2024 assign a generation
-def set_gen(X_data,col):
-    X_data['Generation'] = X_data[col].dt.year.apply(get_generation)
-    return X_data
+def set_gen(data,col):
+    data['Generations'] = data[col].apply(get_generation)
+    return data
 #
+
+def date_to_months(df,col,year):
+    current_date = dt(year, 1, 1)
+    df_copy = df.copy()
+    try:
+        df_copy[col] = pd.to_datetime(df_copy[col])
+        df_copy[col] = ((current_date.year - df_copy[col].dt.year) * 12) + (current_date.month - df_copy[col].dt.month)
+        # df_copy.drop(col, axis=1, inplace=True)
+    except Exception as e:
+        print(f"Error processing column '{col}': {e}")
+        return df
+    return df_copy
+
 # Ordinal encoder function 
-def preprocess_ord(df,col,cat):
-    ord_enc = OrdinalEncoder(categories = [cat], encoded_missing_value=-1, handle_unknown='use_encoded_value', unknown_value=-1)
+def preprocess_ord(df, col, cat):
+    # Create an instance of the OrdinalEncoder with specific settings
+    ord_enc = OrdinalEncoder(categories=[cat], encoded_missing_value=-1,
+                             handle_unknown='use_encoded_value', unknown_value=-1)
+    
+    # Fit and transform the column data; ensure it's passed as a DataFrame slice
     ord_encoded = ord_enc.fit_transform(df[[col]])
+    
+    # Create a DataFrame from the encoded data, using the same column name for consistency
     encoded_df = pd.DataFrame(ord_encoded, columns=[col])
-    # df.drop(col,axis=1,inplace=True)
-    df2 = pd.concat([(df.drop(col,axis=1)),encoded_df], axis=1)
+    
+    # Drop the original column from df before concatenating to avoid modifying the original DataFrame
+    df = df.drop(col, axis=1)
+    
+    # Concatenate the new encoded DataFrame with the modified original DataFrame
+    df2 = pd.concat([df, encoded_df], axis=1)
+    
     return df2
 #
-def X_preprocess_ohe(X_data,col):
-    ohe_encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
-    ohe_encoder.fit(X_data[col].values.reshape(-1,1))
-    ohe_encoded = ohe_encoder.transform(X_data[col].values.reshape(-1,1))
-    ohe_encoded_df = pd.DataFrame(ohe_encoded, columns = ohe_encoder.get_feature_names_out())
-    out_df  = pd.concat([ohe_encoded_df,X_data],axis=1)
-    out_df.drop([col], axis=1, inplace=True)
-    return out_df
-#    
+def preprocess_ohe(df, ohe_column_list):
+    # Create a copy of the DataFrame to avoid modifying the original DataFrame
+    df_copy = df.copy()
+    
+    # List to store DataFrames of encoded columns
+    encoded_dfs = []
+
+    # Iterate over each column specified for one-hot encoding
+    for column in ohe_column_list:
+        # Initialize the OneHotEncoder
+        ohe_encoder = OneHotEncoder(handle_unknown='error', sparse_output=False)
+        
+        # Fit and transform the data of the column
+        ohe_encoded = ohe_encoder.fit_transform(df_copy[[column]])
+        
+        # Create a DataFrame from the encoded data with appropriate column names
+        ohe_encoded_df = pd.DataFrame(ohe_encoded, columns=ohe_encoder.get_feature_names_out(input_features=[column]))
+        
+        # Append the newly encoded DataFrame to the list
+        encoded_dfs.append(ohe_encoded_df)
+        
+        # Drop the original column from the copy of the DataFrame
+        df_copy.drop(column, axis=1, inplace=True)
+    
+    # Concatenate all the encoded DataFrames with the modified original DataFrame
+    df_copy = pd.concat([df_copy] + encoded_dfs, axis=1)
+    
+    return df_copy
+
+
 def test_train_split(df,y_value):
     X = df.drop(y_value, axis=1)
     y = df[y_value]
@@ -75,12 +120,12 @@ def test_train_split(df,y_value):
     return X_train, X_test, y_train, y_test
 
 
-def date_to_months(df,col,current_date):
-    df[col] = pd.to_datetime(df[col])
-    # set sample date to the date of the dataset creation
-    df[col] = ((current_date.year - df[col].dt.year) * 12) + (current_date.month - df[col].dt.month)
-    df.drop(col, axis=1, inplace=True)
-    return df
+# def date_to_months(df,col,current_date):
+#    df[col] = pd.to_datetime(df[col])
+#    # set sample date to the date of the dataset creation
+#    df[col] = ((current_date.year - df[col].dt.year) * 12) + (current_date.month - df[col].dt.month)
+#    df.drop(col, axis=1, inplace=True)
+#    return df
 
 def dob_gen(X_data,col):
     return
