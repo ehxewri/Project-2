@@ -121,7 +121,12 @@ _________________________________________________
 
 
 set education from 0 for none to highest level.
-- **Education**: Customer’s level of education.
+- **Education**: 
+    - **Basic** This generally refers to elementary or primary education.
+    - **2n Cycle** This is not a commonly used term globally but might refer to secondary education or an intermediary level in some education systems.
+    - **Graduation** Typically refers to the completion of a bachelor's or undergraduate degree.
+    - **Master** A postgraduate degree that follows the completion of a bachelor's degree.
+    - **PhD** The highest university degree, typically following a master's degree.
 
 - **Marital**: Customer’s marital status.
 - **Kidhome**: Number of small children in customer’s household.
