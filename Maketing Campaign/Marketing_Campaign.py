@@ -5,6 +5,17 @@ import numpy as np
 import pandas as pd
 from datetime import datetime as dt
 
+# Scoring 
+from sklearn.metrics import precision_score, recall_score, f1_score, classification_report, confusion_matrix, accuracy_score
+from sklearn.model_selection import cross_val_score
+# models 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+
 # Function to determine generation
 
 def auto_drop_na(df, drop_percent):
@@ -112,6 +123,12 @@ def preprocess_ohe(df, ohe_column_list):
     
     return df_copy
 
+def logistic(X,y):
+    X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=.2,random_state=42)
+    lr=LogisticRegression(max_iter=50000)
+    lr.fit(X_train,y_train)
+    prob=lr.predict_proba(X_test)
+    return (prob[:,1],y_test)
 
 def test_train_split(df,y_value):
     X = df.drop(y_value, axis=1)
