@@ -104,7 +104,7 @@ def preprocess_ohe(df, ohe_column_list):
     # Iterate over each column specified for one-hot encoding
     for column in ohe_column_list:
         # Initialize the OneHotEncoder
-        ohe_encoder = OneHotEncoder(handle_unknown='error', sparse_output=False)
+        ohe_encoder = OneHotEncoder(handle_unknown='error', sparse_output=False, drop='first')
         
         # Fit and transform the data of the column
         ohe_encoded = ohe_encoder.fit_transform(df_copy[[column]])
