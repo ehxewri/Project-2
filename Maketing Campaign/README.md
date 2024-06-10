@@ -8,7 +8,8 @@ Marketing Proposal
 - ** Define a Problem**: Identify a significant issue that can be addressed with ML.
     - **Increase the effeciency** of the upcoming marketing campaign by targeting clients that are more likely to be receptive to the offer. Our client has a limited budget and can not have a dialing campaign for all customers and stay within budget. They need to know what customer are mostlikely to be receptive to the marketing campaign so they can maximize the value of there maketing campaign. 
 
-- **Dataset Requirements**: Utilize a dataset with at least 500 records. For decision tree/random forest models, at least 1,000 records are required.
+- **Dataset Requirements**: (Why did we pick this project and this dataset?)
+Utilize a dataset with at least 500 records. For decision tree/random forest models, at least 1,000 records are required.
     - ** Marketing Campaign has over 2000 records. 
 
 ### Project Element 
@@ -17,8 +18,38 @@ Marketing Proposal
     - **supervised**: The business wanted to know how likely customers are to respond to a new campaignin a positive way. To do this we need to look at what we know about our clients and how they have responded in the past. Our df - response is our X. y will be the repsonce column. 
 
 - **Evaluation**: Assess your model using testing data, incorporating necessary metrics and visualizations.
+
+    Describe each field quickly
+
+    Describe the data pre processing we need to do. 
+
+
+
     - **80/20 split**
+        Why we slit before preprocessing? Add verbage. 
+
     - **Standard Scaler** Testing shows that standard scaler has a lower training score but a much better test score than Min/Max. We will use Standard Scaler
+    - Balance date
+    - Encoding
+        - eduction
+        - Maital status
+        - generation
+        - How long has this cuatomer been with us in months
+        why did we drop na
+        why did we drop index
+
+        Frank to add coorilation and recommend droping columns
+    
+    What model do we use that best suite our data and why
+
+    # Test models
+        -RANDOM FOREST MODEL *
+        -GradientBoostingClassifier
+        -KNeighborsClassifier
+        -SVM (Support Vector Machine)
+        -LogisticRegression
+        -Decision Tree Model *
+
 
 - **Technologies**: Mandatory use of Scikit-learn and at least three of the following:
   - API requests - not needed. we imported this using an API anyway so anyone who has a kaggle account can setup and run this. 
@@ -90,7 +121,12 @@ _________________________________________________
 
 
 set education from 0 for none to highest level.
-- **Education**: Customer’s level of education.
+- **Education**: 
+    - **Basic** This generally refers to elementary or primary education.
+    - **2n Cycle** This is not a commonly used term globally but might refer to secondary education or an intermediary level in some education systems.
+    - **Graduation** Typically refers to the completion of a bachelor's or undergraduate degree.
+    - **Master** A postgraduate degree that follows the completion of a bachelor's degree.
+    - **PhD** The highest university degree, typically following a master's degree.
 
 - **Marital**: Customer’s marital status.
 - **Kidhome**: Number of small children in customer’s household.
