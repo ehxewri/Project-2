@@ -163,3 +163,4 @@ cython_debug/
 #.idea/
 # dont push reserouce files
 resources/
+AI.code-workspace

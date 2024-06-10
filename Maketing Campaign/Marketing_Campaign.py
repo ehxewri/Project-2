@@ -67,7 +67,8 @@ def date_to_months(df,col,year):
     df_copy = df.copy()
     try:
         df_copy[col] = pd.to_datetime(df_copy[col])
-        df_copy[col] = ((current_date.year - df_copy[col].dt.year) * 12) + (current_date.month - df_copy[col].dt.month)
+ #       df_copy[col] = ((current_date.year - df_copy[col].dt.year) * 12) + (current_date.month - df_copy[col].dt.month)
+        df_copy[col] = (current_date.year - df_copy[col].dt.year)
         # df_copy.drop(col, axis=1, inplace=True)
     except Exception as e:
         print(f"Error processing column '{col}': {e}")
