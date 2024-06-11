@@ -15,6 +15,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
 
 # Function to determine generation
 
@@ -147,6 +148,28 @@ def test_train_split(df,y_value):
 
 def dob_gen(X_data,col):
     return
+
+def plot_pca_results(X_train_pca, X_test_pca):
+    plt.figure(figsize=(12, 6))
+
+    # Plot training data
+    plt.subplot(1, 2, 1)
+    plt.scatter(X_train_pca.iloc[:, 0], X_train_pca.iloc[:, 1], color='blue', alpha=0.5, label='Train Data')
+    plt.title('PCA Transformed Training Data')
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.legend()
+
+    # Plot testing data
+    plt.subplot(1, 2, 2)
+    plt.scatter(X_test_pca.iloc[:, 0], X_test_pca.iloc[:, 1], color='green', alpha=0.5, label='Test Data')
+    plt.title('PCA Transformed Test Data')
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
 
 
 if __name__ == "__main__":
