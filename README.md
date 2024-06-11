@@ -1,5 +1,5 @@
 # Project 2: Machine Learning Application
-
+ [Marketing Campaign Analysis](https://docs.google.com/presentation/d/1wyL94oJSdOjowYapD1P9t_8R4VKFjqnOhfZ6gAC0Dc0/edit#slide=id.g2733edf450f_0_130)
 ## Overview
 For Project 2, your group will tackle a problem using machine learning (ML), combined with other technologies you've learned. This project involves finding a dataset, choosing an ML model, and applying your knowledge to solve, analyze, or visualize the chosen problem.
 
