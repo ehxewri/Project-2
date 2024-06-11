@@ -152,3 +152,42 @@ O. Parr-Rud. *Business Analytics Using SAS Enterprise Guide and SAS Enterprise M
 The main objective is to train a predictive model which allows the company to maximize the profit of the next marketing campaign.
 
 
+# Pre ipynb execute setup
+
+
+## Install and Set Up Kaggle and API Key
+
+Follow these steps to install and configure the Kaggle API on your system:
+
+1. **Create a Kaggle Account**
+   - Visit [Kaggle](https://www.kaggle.com) and sign up for an account.
+
+2. **Obtain Kaggle API Key**
+   - Go to your Kaggle account settings.
+   - Find the "API" section and click on "Create New API Token".
+   - This will download a `kaggle.json` file containing your API key.
+
+3. **Install Kaggle Package**
+   - Use Conda to install the Kaggle package by running:
+     ```bash
+     conda install kaggle
+     ```
+    Note: this should download the json with you key to downloads
+
+
+4. **Configure API Key**
+   - Copy the `kaggle.json` file to your user directory under the `.kaggle` folder. On most systems, you can use the following command:
+
+To use the API to import a dataset use
+
+  kaggle.api.dataset_download_files('rodsaldanha/arketing-campaign', path='resources', unzip=True)
+
+    -   Path this will put the files in a directory. if none is specified it looks in your current working directory. if the directory is not found it will create it. 
+    -   unzip: 
+
+#
+
+
+Initial Analysis
+
+NA fields
